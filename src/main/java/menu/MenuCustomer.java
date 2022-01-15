@@ -31,7 +31,7 @@ public class MenuCustomer {
         System.out.println();
         System.out.println("1: List all customers");
         System.out.println("2: Customer updating menu");
-        System.out.println("3: List total active customers");
+        System.out.println("3: Total active customers");
         System.out.println("4: List total active and not active customers");
         System.out.println("5: ");
         System.out.println("6: Create new customer");
@@ -53,6 +53,7 @@ public class MenuCustomer {
                     this.updateCustomerMenu.menuChoice(input);
                     break;
                 case 3:
+                    menuAllActiveCustomers(input);
                     break;
                 case 4:
                     break;
@@ -82,6 +83,18 @@ public class MenuCustomer {
             }
         } else {
             System.out.println("\nNo customers registered\n");
+            menuOptions(input);
+        }
+    }
+
+    private void menuAllActiveCustomers(Scanner input) {
+        Long activeCustomers = repositoryCustomer.listActiveCustomers();
+
+        if (activeCustomers > 0) {
+            System.out.println("\nList of active customers:");
+            System.out.println(activeCustomers);
+        } else {
+            System.out.println("\nNo active customers\n");
             menuOptions(input);
         }
     }

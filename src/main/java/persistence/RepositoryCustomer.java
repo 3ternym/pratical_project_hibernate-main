@@ -28,4 +28,12 @@ public class RepositoryCustomer extends CRUDRepository<Customer>{
     public Customer findById(int id) {
         return em.getReference(Customer.class, id);
     }
+
+    public long listActiveCustomers() {
+        return (long) em.createQuery("SELECT count(account_status) FROM Customer WHERE account_status = 1").getSingleResult();
+    }
+
+    public long listUnactiveCustomers() {
+        return (long) em.createQuery("SELECT count(account_status) FROM Customer WHERE account_status = 0").getSingleResult();
+    }
 }

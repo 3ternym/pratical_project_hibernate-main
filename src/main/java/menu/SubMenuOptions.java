@@ -7,9 +7,11 @@ import java.util.Scanner;
 public class SubMenuOptions {
     boolean exit = false;
     private MenuCustomer menuCustomer;
+    private MenuOrder menuOrder;
 
     public SubMenuOptions() {
         this.menuCustomer = new MenuCustomer();
+        this.menuOrder = new MenuOrder();
     }
 
     private int menuOptions(Scanner input) {
@@ -20,7 +22,7 @@ public class SubMenuOptions {
         System.out.println("1: Sub Menu - Customer");
         System.out.println("2: Sub Menu - Delivery");
         System.out.println("3: Sub Menu - Products");
-        System.out.println("4: Sub Menu - <NAME>");
+        System.out.println("4: Sub Menu - Order info");
         System.out.println("100 - Quit");
         System.out.println("***************************************************");
 
@@ -40,6 +42,7 @@ public class SubMenuOptions {
                 case 3:
                     break;
                 case 4:
+                    this.menuOrder.menuChoice(input);
                     break;
                 case 5:
                     break;
