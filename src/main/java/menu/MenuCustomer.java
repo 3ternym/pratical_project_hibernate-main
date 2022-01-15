@@ -9,7 +9,20 @@ import model.Customer;
 import persistence.RepositoryCustomer;
 
 public class MenuCustomer {
+
+    private static Scanner input = new Scanner(System.in);
+
     RepositoryCustomer repositoryCustomer = new RepositoryCustomer();
+    private static UpdateCustomerMenu updateCustomerMenu;
+
+    public MenuCustomer() {
+        this.updateCustomerMenu = new UpdateCustomerMenu();
+    }
+
+    public static void getCustomerMenu() {
+        MenuCustomer menuCustomer = new MenuCustomer();
+        menuCustomer.menuChoice(input);
+    }
 
     private int menuOptions(Scanner input) {
         System.out.println("\n/***************************************************/");
@@ -17,10 +30,10 @@ public class MenuCustomer {
         System.out.println("-------------------------\n");
         System.out.println();
         System.out.println("1: List all customers");
-        System.out.println("2: Update account status");
+        System.out.println("2: Customer updating menu");
         System.out.println("3: List total active customers");
         System.out.println("4: List total active and not active customers");
-        System.out.println("5: Update customers phone number by customer id");
+        System.out.println("5: ");
         System.out.println("6: Create new customer");
         System.out.println("100 - Return to Main Menu");
         System.out.println("\n/***************************************************/");
@@ -37,6 +50,7 @@ public class MenuCustomer {
                     menuListAllCustomers(input);
                     break;
                 case 2:
+                    this.updateCustomerMenu.menuChoice(input);
                     break;
                 case 3:
                     break;
@@ -57,8 +71,6 @@ public class MenuCustomer {
             }// End of switch statement
         } while (userChoice != 100);
     }
-
-
 
     private void menuListAllCustomers(Scanner input) {
         List<Customer> listCustomer = repositoryCustomer.listAllCustomers();
@@ -146,6 +158,8 @@ public class MenuCustomer {
         customer.setUserName(username);
         repositoryCustomer.create(customer);
     }
+
+
 
     private boolean validateEmail(String email) {
         String EMAIL_PATTERN = "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$";
