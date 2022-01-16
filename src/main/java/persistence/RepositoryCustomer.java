@@ -21,8 +21,10 @@ public class RepositoryCustomer extends CRUDRepository<Customer>{
     }
 
     //TODO: make it actually return a list so MenuCustomer can check if username exists in the list
-    public List<Customer> listAllCustomersByUserName() {
-        return em.createQuery("SELECT c.username FROM Customer c order by c.username", Customer.class).getResultList();
+    public List<String> listAllCustomersByUserName(String userName) {
+        return em.createQuery("SELECT c.userName FROM Customer c WHERE c.userName = :user", String.class)
+                .setParameter("user", userName)
+                .getResultList();
     }
 
     public Customer findById(int id) {

@@ -139,7 +139,7 @@ public class MenuCustomer {
             username = input.next();
             boolean userNameResult = validateUsername(username);
 
-            if(userNameResult) {
+            if(!userNameResult) {
                 System.out.println("Username already exists in database!\n Please try again!");
             } else {
                 validateUsernameBooleanCheck = true;
@@ -183,15 +183,11 @@ public class MenuCustomer {
     }
 
     private boolean validateUsername(String username) {
-        if(repositoryCustomer.listAllCustomersByUserName().contains(username)) {
-            return false;
-        } else {
-            return true;
-        }
+        return repositoryCustomer.listAllCustomersByUserName(username).isEmpty();
     }
 
     private boolean validatePhoneNumber(String phoneNumber) {
-        String PHONE_PATTERN = "\\\\d{8}|\\\\d{7}";
+        String PHONE_PATTERN = "^[0-9]{4,15}";
 
         Pattern pattern = Pattern.compile(PHONE_PATTERN);
         Matcher matcher = pattern.matcher(phoneNumber);
