@@ -39,7 +39,7 @@ public class Customer {
     @Column(name = "profile_image")
     private String profileImage;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String userName;
 
     @Column(name = "password")
