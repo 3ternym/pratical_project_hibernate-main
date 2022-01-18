@@ -75,7 +75,7 @@ public class MenuOrder {
         List<Order> orderList = repositoryOrder.listAllRegisteredOrdersByStatus(inputStatus);
 
         if(orderList.size() > 0) {
-            System.out.printf("\nList of registered orders sorted by %S", inputStatus);
+            System.out.printf("\nList of registered orders sorted by %S", orderList);
             for (Order order : orderList) {
                 System.out.println(order.toString());
             }

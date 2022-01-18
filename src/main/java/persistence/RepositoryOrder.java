@@ -5,8 +5,11 @@ import util.DBUtil;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Scanner;
 
 public class RepositoryOrder extends CRUDRepository<Order> {
+
+    Scanner sc = new Scanner(System.in);
 
     private EntityManager em;
 
@@ -19,15 +22,8 @@ public class RepositoryOrder extends CRUDRepository<Order> {
     }
 
     public List<Order> listAllRegisteredOrdersByStatus(String status) {
-        Order order = new Order();
-        order.setStatus(status);
-        String hql = "FROM Order WHERE status = '" + order.getStatus() + "'";
+        status = sc.nextLine();
+        String hql = "FROM Order WHERE status = '" + status + "'";
         return em.createQuery(hql, Order.class).getResultList();
-
-        /*
-        String hql = "from Student student where student.studentName = '" + studentName+ "'";
-        Query query = session.createQuery(hql);
-        List result = query.list();
-         */
     }
 }
