@@ -34,6 +34,7 @@ public class MenuOrder {
                     menuListAllRegisteredOrders(input);
                     break;
                 case 2:
+                    menuListAllOrdersByStatus(input);
                     break;
                 case 3:
                     break;
@@ -66,5 +67,22 @@ public class MenuOrder {
             System.out.println("\nNo registered orders\n");
             menuOptions(input);
         }
+    }
+
+    private void menuListAllOrdersByStatus(Scanner input) {
+        System.out.println("\nTYPE STATUS YOU WISH TO SORT BY \n(PENDING, WAITING FOR PAYMENT, PAYMENT RECEIVED, TRANSPORT)");
+        String inputStatus = input.nextLine();
+        List<Order> orderList = repositoryOrder.listAllRegisteredOrdersByStatus(inputStatus);
+
+        if(orderList.size() > 0) {
+            System.out.printf("\nList of registered orders sorted by %S", inputStatus);
+            for (Order order : orderList) {
+                System.out.println(order.toString());
+            }
+        } else {
+            System.out.println("\nNo registered orders\n");
+            menuOptions(input);
+        }
+
     }
 }

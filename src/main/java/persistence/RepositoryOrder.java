@@ -15,6 +15,19 @@ public class RepositoryOrder extends CRUDRepository<Order> {
     }
 
     public List<Order> listAllRegisteredOrders() {
-        return em.createQuery("from Order", Order.class).getResultList();
+        return em.createQuery("from Orders", Order.class).getResultList();
+    }
+
+    public List<Order> listAllRegisteredOrdersByStatus(String status) {
+        Order order = new Order();
+        order.setStatus(status);
+        String hql = "FROM Order WHERE status = '" + order.getStatus() + "'";
+        return em.createQuery(hql, Order.class).getResultList();
+
+        /*
+        String hql = "from Student student where student.studentName = '" + studentName+ "'";
+        Query query = session.createQuery(hql);
+        List result = query.list();
+         */
     }
 }
